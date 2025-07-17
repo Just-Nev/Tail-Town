@@ -2205,38 +2205,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327844694}
   m_CullTransparentMesh: 1
---- !u!1 &349462344
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 349462345}
-  m_Layer: 0
-  m_Name: DoorHinge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &349462345
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349462344}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.00017630518, w: 1}
-  m_LocalPosition: {x: -2.055, y: 2.1585002, z: -0.012055581}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2130878961}
-  m_Father: {fileID: 860809631}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.02}
 --- !u!1 &349839505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,8 +2707,8 @@ Transform:
   m_GameObject: {fileID: 410198475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.77, y: 0, z: 0}
-  m_LocalScale: {x: 0.3478, y: 3.9709, z: 1}
+  m_LocalPosition: {x: 0.77, y: 0.0306, z: 0}
+  m_LocalScale: {x: 0.3478, y: 4.032052, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 860809631}
@@ -4405,7 +4373,7 @@ Transform:
   m_GameObject: {fileID: 597299775}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: 5.9943, y: 2.1555, z: 0}
+  m_LocalPosition: {x: 5.9943, y: 2.17, z: 0}
   m_LocalScale: {x: 0.3478, y: 12.709594, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5898,7 +5866,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 349462345}
+  - {fileID: 2130878961}
   - {fileID: 1835122497}
   - {fileID: 513363271}
   - {fileID: 434677030}
@@ -12637,11 +12605,11 @@ GameObject:
   - component: {fileID: 2130878961}
   - component: {fileID: 2130878963}
   - component: {fileID: 2130878962}
-  - component: {fileID: 2130878964}
   - component: {fileID: 2130878966}
-  - component: {fileID: 2130878965}
+  - component: {fileID: 2130878967}
+  - component: {fileID: 2130878968}
   m_Layer: 6
-  m_Name: Square (5)
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12655,13 +12623,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130878960}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: 0.797, y: 0.009500027, z: 0.012055581}
-  m_LocalScale: {x: 0.26401046, y: 2.3126128, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000014603138, w: 1}
+  m_LocalPosition: {x: -2.388, y: 2.183, z: 0}
+  m_LocalScale: {x: 3.159255, y: 0.7951509, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 349462345}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 860809631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2130878962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12696,17 +12664,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.30989987, y: -0.00000017881393}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0, y: 0.5}
+    oldSize: {x: 0.64, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6536406, y: 0.32358676}
   m_EdgeRadius: 0
 --- !u!212 &2130878963
 SpriteRenderer:
@@ -12752,7 +12720,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -16
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2225942082661296427, guid: 79095142cf3bc2f4b8d37af520a5ad90, type: 3}
   m_Color: {r: 0.690566, g: 0.32017356, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12763,35 +12731,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2130878964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130878960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2afc92e83ef3e34fbe03b7f28427e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tintAmount: 0.303
---- !u!208 &2130878965
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130878960}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &2130878966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12804,6 +12743,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5c4fae0a74bd44fb81be7fe758769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 180
+--- !u!114 &2130878967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130878960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2afc92e83ef3e34fbe03b7f28427e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tintAmount: 0.259
+--- !u!208 &2130878968
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130878960}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.32000002, y: 0.16000001, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.32000002, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2146219586
 GameObject:
   m_ObjectHideFlags: 0
