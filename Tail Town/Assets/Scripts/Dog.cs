@@ -10,30 +10,43 @@ public class Dog : MonoBehaviour
 
     [Header("Energy")]
     public float maxEnergy = 100f;
-    public float energyDrainRate = 5f;       // Energy per second while wandering
-    public float energyRecoveryRate = 10f;   // Energy per second while sleeping
+    public float energyDrainRate = 5f;
+    public float energyRecoveryRate = 10f;
     public float lowEnergyThreshold = 20f;
 
+    [Header("Thirst")]
+    public float maxThirst = 100f;
+    public float thirstDrainRate = 3f;
+    public float thirstRecoveryRate = 15f;
+    public float lowThirstThreshold = 25f;
+    public GameObject waterBowl;
+    public SpriteRenderer bowlRenderer;
+    public ParticleSystem drinkingEffectPrefab;
+
     [Header("Sleep Settings")]
-    public GameObject sleepSpot;             // Assign in Inspector
+    public GameObject sleepSpot;
 
     [Header("Visual Effects")]
-    public ParticleSystem sleepEffectPrefab; // Assign particle system prefab
+    public ParticleSystem sleepEffectPrefab;
 
     private NavMeshAgent agent;
     private bool isWandering = false;
     private bool isSleeping = false;
+    private bool isDrinking = false;
     private float currentEnergy;
+    private float currentThirst;
 
-    private ParticleSystem activeSleepEffect; // Reference to the instantiated effect
+    private ParticleSystem activeSleepEffect;
+    private ParticleSystem activeDrinkEffect;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false; // Important for 2D
+        agent.updateRotation = false;
         agent.updateUpAxis = false;
 
         currentEnergy = maxEnergy;
+        currentThirst = maxThirst;
 
         StartCoroutine(DogRoutine());
     }
@@ -42,7 +55,11 @@ public class Dog : MonoBehaviour
     {
         while (true)
         {
-            if (currentEnergy <= lowEnergyThreshold)
+            if (currentThirst <= lowThirstThreshold)
+            {
+                yield return StartCoroutine(DrinkRoutine());
+            }
+            else if (currentEnergy <= lowEnergyThreshold)
             {
                 yield return StartCoroutine(GoSleepRoutine());
             }
@@ -63,6 +80,7 @@ public class Dog : MonoBehaviour
         while (agent.pathPending || agent.remainingDistance > 0.1f)
         {
             DrainEnergy();
+            DrainThirst();
             yield return null;
         }
 
@@ -81,13 +99,11 @@ public class Dog : MonoBehaviour
             yield return null;
         }
 
-        // Instantiate sleep effect and store reference
         if (sleepEffectPrefab != null && activeSleepEffect == null)
         {
             activeSleepEffect = Instantiate(sleepEffectPrefab, sleepSpot.transform.position, Quaternion.identity);
         }
 
-        // Sleep and restore energy
         while (currentEnergy < maxEnergy)
         {
             currentEnergy += energyRecoveryRate * Time.deltaTime;
@@ -99,12 +115,66 @@ public class Dog : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        // Destroy particle effect after sleeping
         if (activeSleepEffect != null)
         {
             activeSleepEffect.Stop();
-            Destroy(activeSleepEffect.gameObject, 1f); // Wait a second before destroying (in case there's fade-out)
+            Destroy(activeSleepEffect.gameObject, 1f);
             activeSleepEffect = null;
+        }
+    }
+
+    private IEnumerator DrinkRoutine()
+    {
+        isDrinking = true;
+        agent.SetDestination(waterBowl.transform.position);
+
+        while (agent.pathPending || agent.remainingDistance > 0.1f)
+        {
+            yield return null;
+        }
+
+        Color bowlColor = bowlRenderer.color;
+        if (bowlColor.a <= 0.05f)
+        {
+            Debug.Log("Bowl is empty — dog cannot drink.");
+            yield return new WaitForSeconds(1f);
+            isDrinking = false;
+            yield break;
+        }
+
+        float drinkDuration = (maxThirst - currentThirst) / thirstRecoveryRate;
+        float elapsed = 0f;
+        Color originalColor = bowlColor;
+
+        // Instantiate drink particle effect
+        if (drinkingEffectPrefab != null)
+        {
+            activeDrinkEffect = Instantiate(drinkingEffectPrefab, waterBowl.transform.position, Quaternion.identity);
+            activeDrinkEffect.Play();
+        }
+
+        while (currentThirst < maxThirst && bowlRenderer.color.a > 0.05f)
+        {
+            currentThirst += thirstRecoveryRate * Time.deltaTime;
+            elapsed += Time.deltaTime;
+
+            // Drain bowl alpha over time
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / drinkDuration);
+            Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Clamp01(alpha));
+            bowlRenderer.color = newColor;
+
+            yield return null;
+        }
+
+        currentThirst = Mathf.Min(currentThirst, maxThirst);
+        isDrinking = false;
+
+        // Stop and clean up particle effect
+        if (activeDrinkEffect != null)
+        {
+            activeDrinkEffect.Stop();
+            Destroy(activeDrinkEffect.gameObject, 1f);
+            activeDrinkEffect = null;
         }
     }
 
@@ -112,6 +182,12 @@ public class Dog : MonoBehaviour
     {
         currentEnergy -= energyDrainRate * Time.deltaTime;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
+    }
+
+    private void DrainThirst()
+    {
+        currentThirst -= thirstDrainRate * Time.deltaTime;
+        currentThirst = Mathf.Clamp(currentThirst, 0, maxThirst);
     }
 
     private Vector3 GetRandomNavmeshLocation(float radius)
@@ -127,9 +203,11 @@ public class Dog : MonoBehaviour
             }
         }
 
-        return transform.position; // fallback
+        return transform.position;
     }
 }
+
+
 
 
 
