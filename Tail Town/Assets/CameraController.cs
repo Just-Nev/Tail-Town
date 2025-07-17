@@ -54,7 +54,6 @@ public class CameraController : MonoBehaviour
 
             if (useBounds)
             {
-                // Re-check bounds after zoom change
                 Vector3 clampedPosition = ClampPositionToBounds(transform.position);
                 transform.position = new Vector3(clampedPosition.x, clampedPosition.y, transform.position.z);
             }
@@ -72,3 +71,6 @@ public class CameraController : MonoBehaviour
         return position;
     }
 }
+
+
+
