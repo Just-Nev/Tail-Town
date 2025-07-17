@@ -70,7 +70,31 @@ public class CameraController : MonoBehaviour
 
         return position;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        if (!useBounds) return;
+
+        Gizmos.color = Color.green;
+
+        Vector3 center = new Vector3(
+            (minBounds.x + maxBounds.x) / 2f,
+            (minBounds.y + maxBounds.y) / 2f,
+            0f
+        );
+
+        Vector3 size = new Vector3(
+            Mathf.Abs(maxBounds.x - minBounds.x),
+            Mathf.Abs(maxBounds.y - minBounds.y),
+            0f
+        );
+
+        Gizmos.DrawWireCube(center, size);
+    }
+#endif
 }
+
 
 
 
